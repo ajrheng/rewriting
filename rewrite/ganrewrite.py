@@ -819,7 +819,7 @@ def rank_one_conv(weight, direction):
 
 
 def zca_from_cov(cov):
-    evals, evecs = torch.symeig(cov.double(), eigenvectors=True)
+    evals, evecs = torch.linalg.eigh(cov.double())
     zca = torch.mm(torch.mm(evecs, torch.diag
                             (evals.sqrt().clamp(1e-20).reciprocal())),
                    evecs.t()).to(cov.dtype)
