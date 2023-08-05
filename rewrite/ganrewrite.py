@@ -699,7 +699,7 @@ class SeqStyleGanRewriter(ProgressiveGanRewriter):
 
     def covariance_adjusted_query_key(self, k):
         if len(k.shape) == 1:
-            return torch.lstsq(k[:, None], self.c_matrix)[0][:, 0]
+            return torch.linalg.lstsq(k[:, None], self.c_matrix)[0][:, 0]
         return torch.lstsq(k.permute(1, 0), self.c_matrix)[0].permute(1, 0)
 
     def covariance_adjusted_key(self, k, kout):
